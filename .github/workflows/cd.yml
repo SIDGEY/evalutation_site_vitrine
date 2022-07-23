@@ -16,7 +16,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: web-build
-          path : *
+          path: ~/
   
   deploy-web:
     name: Publish Web
