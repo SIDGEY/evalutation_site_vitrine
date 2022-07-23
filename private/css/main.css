@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'GlorialHallelujah';
+    src: url('../font/GloriaHallelujah-Regular.ttf');
+}
+
+h1{
+    font-family: 'GlorialHallelujah';
+    font-size: xx-large;
+    font-weight: 900;
+}
