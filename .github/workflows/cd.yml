@@ -3,7 +3,7 @@ name: Continous Delivery Workflow (WEB)
 
 on:
   push:
-    banches:
+    branches:
       - main
 
 jobs:
