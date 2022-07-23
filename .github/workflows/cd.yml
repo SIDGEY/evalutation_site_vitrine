@@ -1,0 +1,40 @@
+name: Continous Delivery Workflow (WEB)
+#Deploy RC web to WebServer on push main branch
+
+on:
+  push:
+    banches:
+      - main
+
+jobs:
+  build-web:
+    name: build Web
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Archive Release Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: web-build
+          path : *
+  
+  deploy-web:
+    name: Publish Web
+    runs-on: ubuntu-latest
+    needs: [build-web]
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@master
+        with:
+          name: web-build
+          path: web-build
+      - name: Sync Files
+        uses: airvzxf/ftp-deployement-action@latest
+        with: 
+          server: ftp.cluster031.hosting.ovh.net
+          user: ${{secrets.FTP_USER}}
+          password: ${{secrets.FTP_PASSWORD}}
+          local_dir: web-build
+          remote_dir: "ema"
+          delete: "true"
+
